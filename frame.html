@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Screenshot</title>
+    <style>
+      * {
+        margin:0px;
+        padding:0px;  
+      }
+      body {
+        background-color:#272822;  
+      }
+      #container {
+        width:100%;
+        height:100%;
+        position:absolute;
+        top:0px;
+        bottom:0px;
+        left:0px;
+        right:0px;
+        vertical-align: middle;
+        text-align:center;
+      }
+      #image {
+        opacity: 0;
+        transition: opacity .5s ease-in-out;
+        margin: 0 auto;
+        display:inline-block;
+        vertical-align: middle;
+      }
+      .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+      #image.loaded {
+        opacity:1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+        <span class="helper"></span>
+        <img id="image" onload="imageLoaded(this)">
+    </div>
+    <script>
+        document.getElementById("image").setAttribute("src",
+            "https://s3.amazonaws.com/mw-captured/" + 
+            window.location.pathname.split("/")[2]);
+
+        function imageLoaded(image) {
+            image.style.width =  image.naturalWidth/2 + "px";
+            image.style.height = image.naturalHeight/2 + "px";
+            image.className = "loaded";
+        }
+    </script>
+  </body>
+</html>
